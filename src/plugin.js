@@ -121,6 +121,12 @@ export default class TimesheetBlock {
     };
   }
 
+  static prepare({ config = {} }) {
+    TimesheetBlock.patterns = config.regex ? {
+      timesheet: config.regex
+    } : {}
+  }
+
   /**
    * Return Tool's view
    *
@@ -320,6 +326,21 @@ export default class TimesheetBlock {
         this.nodes.inputHolder.classList.add(this.CSS.hide);
         break;
     }
+  }
+
+  onPaste(event) {
+    console.log('****************', event)
+    switch (event.type){
+      case 'pattern':
+        this.loadData(event.detail.data);
+        break;
+    }
+  }
+
+  static get pasteConfig() {
+    return {
+      patterns: TimesheetBlock.patterns,
+    };
   }
 
   /**
