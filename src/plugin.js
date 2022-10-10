@@ -277,7 +277,7 @@ export default class TimesheetBlock {
       entryBill = Math.round(entryBill * 100) / 100;
 
       data.push([
-        entry.story_name, utils.minutesToLabel(entry.minutes_spent), entry.note, '$'+response.per_hour, '$'+entryBill
+        entry.story_name, utils.minutesToLabel(entry.minutes_spent), entry.notes, '$'+response.per_hour, '$'+entryBill
       ]);
     }
     const totalMins = response.entries.reduce((accumulator, entry) => {
@@ -329,7 +329,6 @@ export default class TimesheetBlock {
   }
 
   onPaste(event) {
-    console.log('****************', event)
     switch (event.type){
       case 'pattern':
         this.loadData(event.detail.data);
