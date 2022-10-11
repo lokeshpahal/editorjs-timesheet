@@ -63,6 +63,7 @@ export default class TimesheetBlock {
       snippet: data && data.snippet ? data.snippet : null
     };
     this.config = config;
+    this.placeholder = this.config.placeholder || 'Timesheet Snippet';
     this.table = null;
     this.regex = config.regex;
     this.nodes = {
@@ -232,7 +233,7 @@ export default class TimesheetBlock {
     this.nodes.textInput = $.make('div', [this.api.styles.input, this.CSS.input, this.CSS.inputText], {
       contentEditable: !this.readOnly,
     });
-    this.nodes.textInput.dataset.placeholder = this.api.i18n.t('Timesheet Snippet');
+    this.nodes.textInput.dataset.placeholder = this.api.i18n.t(this.placeholder);
 
     this.nodes.textInput.addEventListener('input', (event) => {
       if (this.regex.test(this.nodes.textInput.textContent)) {
